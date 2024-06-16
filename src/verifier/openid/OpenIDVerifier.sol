@@ -8,6 +8,7 @@ import "../../interfaces/IPermissionVerifier.sol";
 
 import "./AudManager.sol";
 import "./OpenIDKeyManager.sol";
+import "forge-std/console2.sol";
 
 contract OpenIDVerifier is OpenIDKeyManager, AudManager, IPermissionVerifier {
     using LibBytes for bytes;
@@ -65,10 +66,20 @@ contract OpenIDVerifier is OpenIDKeyManager, AudManager, IPermissionVerifier {
         bytes32 timestamp = LibBytes.uint32ToASSCIIBytes32(
             uint32(block.timestamp)
         );
+        console2.log("Now");
+        console2.logBytes32(timestamp);
+        console2.log(block.timestamp);
+        console2.logBytes32(bytes32(iat));
+
         require(
-            timestamp > bytes32(iat) && timestamp < bytes32(exp),
-            "_validateTimestamp: INVALID_TIMESTAMP"
+            timestamp < bytes32(exp),
+            "_validateTimestamp: INVALID_TIMESTAMP exp"
         );
+        require(
+            timestamp > bytes32(iat),
+            "_validateTimestamp: INVALID_TIMESTAMP iat"
+        );
+
     }
 
     function validateIDToken(
@@ -101,6 +112,13 @@ contract OpenIDVerifier is OpenIDKeyManager, AudManager, IPermissionVerifier {
             signature = _data[index:index + len];
             index += len;
         }
+
+        console2.log("Header");
+        console2.logBytes(header);
+        console2.log("payload");
+        console2.logBytes(payload);
+        console2.log("signature");
+        console2.logBytes(signature);
 
         bytes memory publicKey;
         (issHash, publicKey) = _getPublicKeyAndIssHash(
@@ -321,6 +339,12 @@ contract OpenIDVerifier is OpenIDKeyManager, AudManager, IPermissionVerifier {
             bytes32 nonceHash
         ) = validateIDToken(0, signature);
         require(succ, "INVALID_TOKEN");
+
+        console2.log("User validation start");
+        console2.logBytes(LibBytes.toHex(uint256(hash), 32));
+        console2.logBytes32(nonceHash);
+        console2.logBytes32(hash);
+        
         require(
             keccak256((LibBytes.toHex(uint256(hash), 32))) == nonceHash,
             "INVALID_NONCE_HASH"
@@ -331,6 +355,8 @@ contract OpenIDVerifier is OpenIDKeyManager, AudManager, IPermissionVerifier {
             openid_key == LibBytes.mcReadBytes32(signer, 0),
             "INVALID_SIGNER"
         );
+
+        console2.log("User validation end");
 
         return true;
     }

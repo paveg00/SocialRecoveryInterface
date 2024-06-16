@@ -8,6 +8,7 @@ import "../../interfaces/IPermissionVerifier.sol";
 import "./DkimKeys.sol";
 
 import "@openzeppelin/contracts/utils/Address.sol";
+import "forge-std/console2.sol";
 
 contract EmailVerifier is DkimKeys, IPermissionVerifier {
     using LibBytes for bytes;
@@ -403,6 +404,7 @@ contract EmailVerifier is DkimKeys, IPermissionVerifier {
             0,
             signature
         );
+        console2.log("User check");
         require(succ, "INVALID_TOKEN");
         require(
             keccak256((LibBytes.toHex(uint256(hash), 32))) ==

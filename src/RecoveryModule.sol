@@ -7,6 +7,7 @@ import "./interfaces/ISafe.sol";
 import "./interfaces/IRecoveryPolicyVerifier.sol";
 import "./libraries/HashLinkedList.sol";
 import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
+import "forge-std/console2.sol";
 
 contract RecoveryModule {
     using HashLinkedList for mapping(bytes32 => bytes32);
@@ -164,6 +165,7 @@ contract RecoveryModule {
         require(config.enabled, "unenabled policy");
 
         bytes32[] memory identityHashs = new bytes32[](permissions.length);
+        console2.log("Check user");
         for (uint256 i = 0; i < permissions.length; i++) {
             if (permissions[i].guardian.signer.length == 0) {
                 require(

@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@nomicfoundation/hardhat-ignition": "^0.15.4",
+    "@safe-global/safe-singleton-factory": "github:safe-global/safe-singleton-factory",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.5",
+    "hardhat-deploy": "^0.12.4",
+    "hardhat-ethernal": "^3.2.5",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-foundry": "^1.1.2",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

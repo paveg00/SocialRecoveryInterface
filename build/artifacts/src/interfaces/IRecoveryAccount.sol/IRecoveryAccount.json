@@ -1,0 +1,560 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IRecoveryAccount",
+  "sourceName": "src/interfaces/IRecoveryAccount.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "policyVerifier",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "guardianVerifier",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "bytes",
+                      "name": "signer",
+                      "type": "bytes"
+                    }
+                  ],
+                  "internalType": "struct Identity",
+                  "name": "guardian",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "property",
+                  "type": "uint64"
+                }
+              ],
+              "internalType": "struct GuardianInfo[]",
+              "name": "guardianInfos",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint64",
+                  "name": "threshold",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint48",
+                  "name": "lockPeriod",
+                  "type": "uint48"
+                }
+              ],
+              "internalType": "struct ThresholdConfig[]",
+              "name": "thresholdConfigs",
+              "type": "tuple[]"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct RecoveryConfigArg[]",
+          "name": "recoveryConfigs",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "GuardiansUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "name": "RecoveryCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "newOwners",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "name": "RecoveryExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "newOwners",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint48",
+          "name": "expireTime",
+          "type": "uint48"
+        }
+      ],
+      "name": "RecoveryStarted",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DOMAIN_SEPARATOR_NAME",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "DOMAIN_SEPARATOR_VERSION",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyVerifier",
+          "type": "address"
+        }
+      ],
+      "name": "cancelRecovery",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyVerifier",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "guardianVerifier",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "signer",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct Identity",
+              "name": "guardian",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Permission[]",
+          "name": "permissions",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "cancelRecoveryByGuardians",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "domainSeparatorV4",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyVerifier",
+          "type": "address"
+        }
+      ],
+      "name": "executeRecovery",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyVerifier",
+          "type": "address"
+        }
+      ],
+      "name": "getRecoveryConfigs",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "policyVerifier",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "guardianVerifier",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "bytes",
+                      "name": "signer",
+                      "type": "bytes"
+                    }
+                  ],
+                  "internalType": "struct Identity",
+                  "name": "guardian",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "property",
+                  "type": "uint64"
+                }
+              ],
+              "internalType": "struct GuardianInfo[]",
+              "name": "guardianInfos",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint64",
+                  "name": "threshold",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint48",
+                  "name": "lockPeriod",
+                  "type": "uint48"
+                }
+              ],
+              "internalType": "struct ThresholdConfig[]",
+              "name": "thresholdConfigs",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct RecoveryConfigArg",
+          "name": "configArg",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRecoveryNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRecoveryPolicies",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "policyVerifier",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "guardianVerifier",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "bytes",
+                      "name": "signer",
+                      "type": "bytes"
+                    }
+                  ],
+                  "internalType": "struct Identity",
+                  "name": "guardian",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "property",
+                  "type": "uint64"
+                }
+              ],
+              "internalType": "struct GuardianInfo[]",
+              "name": "guardianInfos",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint64",
+                  "name": "threshold",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint48",
+                  "name": "lockPeriod",
+                  "type": "uint48"
+                }
+              ],
+              "internalType": "struct ThresholdConfig[]",
+              "name": "thresholdConfigs",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct RecoveryConfigArg[]",
+          "name": "recoveryconfigArgs",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyVerifier",
+          "type": "address"
+        }
+      ],
+      "name": "getRecoveryStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isRecovering",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint48",
+          "name": "expiryTime",
+          "type": "uint48"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "guardianVerifier",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signer",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Identity",
+          "name": "guardian",
+          "type": "tuple"
+        }
+      ],
+      "name": "isGuardian",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "policyVerifier",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "newOwner",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "guardianVerifier",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "signer",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct Identity",
+              "name": "guardian",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Permission[]",
+          "name": "permissions",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "startRecovery",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "policyVerifier",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "guardianVerifier",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "bytes",
+                      "name": "signer",
+                      "type": "bytes"
+                    }
+                  ],
+                  "internalType": "struct Identity",
+                  "name": "guardian",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "property",
+                  "type": "uint64"
+                }
+              ],
+              "internalType": "struct GuardianInfo[]",
+              "name": "guardianInfos",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint64",
+                  "name": "threshold",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint48",
+                  "name": "lockPeriod",
+                  "type": "uint48"
+                }
+              ],
+              "internalType": "struct ThresholdConfig[]",
+              "name": "thresholdConfigs",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct RecoveryConfigArg[]",
+          "name": "configArgs",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "updateGuardians",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
